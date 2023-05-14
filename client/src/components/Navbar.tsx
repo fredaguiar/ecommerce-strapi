@@ -8,7 +8,7 @@ import {
   SearchOutlined,
 } from '@mui/icons-material';
 import { theme, shades } from '../theme';
-import { setIsCartOpen } from '../state';
+import { setIsCartOpen } from '../state/cartReducer';
 
 const Navbar = () => {
   const navigate = useNavigate();

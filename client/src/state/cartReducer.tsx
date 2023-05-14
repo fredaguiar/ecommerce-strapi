@@ -1,6 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type ICartState = { isCartOpen: boolean; cart: Array<any>; items: Array<any> };
+// export interface IItemState {
+//   count: number;
+//   price: number;
+// }
+
+export interface ICartState {
+  isCartOpen: boolean;
+  cart: Array<any>;
+  items: Array<any>;
+}
+
+export interface ICartState {
+  isCartOpen: boolean;
+  cart: Array<any>;
+  items: Array<any>;
+}
 
 const initialState: ICartState = { isCartOpen: false, cart: [], items: [] };
 
