@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useAppSelector, useAppDispatch } from '../state/store';
-import { IconButton, Box, Badge, Divider, Typography, Button } from '@mui/material';
+import { IconButton, Box, Divider, Typography, Button } from '@mui/material';
 import { shades } from '../theme';
 import { setIsCartOpen, decreaseCount, increaseCount, removeFromCart } from '../state/cartReducer';
 

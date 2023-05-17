@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useAppDispatch } from '../state/store';
@@ -23,12 +22,12 @@ export interface IItemAttributes {
   id: string;
 }
 
-export interface IItemFC {
+export interface IItem {
   item: IItemAttributes;
   width: string;
 }
 
-const Item = ({ item, width }: IItemFC) => {
+const Item = ({ item, width }: IItem) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
