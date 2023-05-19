@@ -1,11 +1,11 @@
-import { IconButton, useMediaQuery } from '@mui/material';
+import { IconButton, Box, useMediaQuery, Divider, Typography, Button } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { shades, theme } from '../../theme';
 import useImages, { IMAGES_FOR } from '../../hooks/useImages';
 import CarouselItem, { ICarouselItem } from './CarouselItem';
-import { Box } from '@mui/system';
 
 const MainCarousel = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -25,7 +25,7 @@ const MainCarousel = () => {
             left: '0',
             color: 'white',
             padding: '5px',
-            zIndex: '10'
+            zIndex: '10',
           }}
         >
           <NavigateBeforeIcon sx={{ fontSize: 40 }} />
@@ -39,7 +39,7 @@ const MainCarousel = () => {
             right: '0',
             color: 'white',
             padding: '5px',
-            zIndex: '10'
+            zIndex: '10',
           }}
           onClick={onClickHandler}
         >

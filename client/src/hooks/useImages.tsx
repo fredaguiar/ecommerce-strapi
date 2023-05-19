@@ -1,10 +1,11 @@
 export enum IMAGES_FOR {
-  CAROUSEL,
+  CAROUSEL
 }
 
-const carousel = require.context('/src/assets/carousel', false, /\.(png|jpe?g|svg)$/);
-const carouselList: Array<string> = carousel.keys().map((image) => carousel(image));
-
+const carousel = require.context('/src/assets/carousel', true, /\.(png|jpe?g|gif|svg)$/);
+const carouselList: Array<string> = carousel.keys().map((image) => {
+  return carousel(image);
+});
 const useImages = (imageFor: IMAGES_FOR) => {
   switch (imageFor) {
     case IMAGES_FOR.CAROUSEL:

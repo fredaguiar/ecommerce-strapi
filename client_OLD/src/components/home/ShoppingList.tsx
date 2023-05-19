@@ -8,7 +8,7 @@ import {
   Typography,
   Button,
   Tab,
-  Tabs
+  Tabs,
 } from '@mui/material';
 import { setItems } from '../../state/cartReducer';
 import Item from '../Item';
@@ -29,7 +29,7 @@ const ShoppingList = (props: IShoppingList) => {
   //   setValue(newValue);
   // };
 
-  return <Box>ShoppingList ShoppingList ShoppingList</Box>;
+  return <Box>ssssss</Box>;
 };
 
 export default ShoppingList;

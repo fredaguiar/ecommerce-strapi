@@ -1,21 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["node", "webpack-env"],
-    "baseUrl": ".",
-    "allowJs": true,
-    "skipLibCheck": true,
+    "target": "es2017",
+    "strictNullChecks": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
+    "module": "commonjs",
     "jsx": "react-jsx"
   },
   "include": ["src"]

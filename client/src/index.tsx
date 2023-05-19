@@ -7,11 +7,6 @@ import App from './App';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { theme } from './theme';
-// import 'dotenv/config';
-
-// console.log(process.env);
-require('dotenv').config();
-console.log(process.env);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
