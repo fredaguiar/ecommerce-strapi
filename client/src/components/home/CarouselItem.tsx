@@ -12,7 +12,7 @@ export interface ICarouselItem {
 const CarouselItem = (props: ICarouselItem) => {
   const { isNonMobile, imageSrc, index } = props;
   return (
-    <Box key={`carousel-image-${index}-${Math.floor(Math.random() * 10000)}`}>
+    <Box>
       <img
         src={imageSrc}
         alt='thumb2'
@@ -20,7 +20,7 @@ const CarouselItem = (props: ICarouselItem) => {
           width: '100%',
           height: '400px',
           objectFit: 'cover',
-          backgroundAttachment: 'fixed',
+          backgroundAttachment: 'fixed'
         }}
       />
       <Box

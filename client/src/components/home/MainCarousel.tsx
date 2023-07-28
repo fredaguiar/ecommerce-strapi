@@ -4,7 +4,7 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import useImages, { IMAGES_FOR } from '../../hooks/useImages';
-import CarouselItem, { ICarouselItem } from './CarouselItem';
+import CarouselItem from './CarouselItem';
 import { Box } from '@mui/system';
 
 const MainCarousel = () => {
@@ -48,7 +48,12 @@ const MainCarousel = () => {
       )}
     >
       {carouselImages.map((imgSrc, index) => (
-        <CarouselItem isNonMobile={isNonMobile} imageSrc={imgSrc} index={index} />
+        <CarouselItem
+          key={`carouselItem-image-${index}-${Math.floor(Math.random() * 10000)}`}
+          isNonMobile={isNonMobile}
+          imageSrc={imgSrc}
+          index={index}
+        />
       ))}
     </Carousel>
   );

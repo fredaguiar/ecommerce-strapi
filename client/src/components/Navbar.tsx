@@ -1,18 +1,18 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../state/store';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, Box, Badge } from '@mui/material';
 import {
   PersonOutline,
   ShoppingBagOutlined,
   MenuOutlined,
-  SearchOutlined,
+  SearchOutlined
 } from '@mui/icons-material';
-import { theme, shades } from '../theme';
+import { shades } from '../theme';
 import { setIsCartOpen } from '../state/cartReducer';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Box
@@ -66,8 +66,8 @@ const Navbar = () => {
                 top: '5',
                 right: '5',
                 height: '14px',
-                minWidth: '14px',
-              },
+                minWidth: '14px'
+              }
             }}
           >
             <IconButton onClick={() => dispatch(setIsCartOpen())} sx={{ color: 'black' }}>

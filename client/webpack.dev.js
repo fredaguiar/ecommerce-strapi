@@ -1,6 +1,6 @@
 const { merge } = require('webpack-merge');
 const webpackConfig = require('./webpack.config.js');
-
+const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = merge(webpackConfig, {
@@ -19,5 +19,6 @@ module.exports = merge(webpackConfig, {
         use: ['style-loader', 'css-loader']
       }
     ]
-  }
+  },
+  plugins: [new Dotenv()]
 });
