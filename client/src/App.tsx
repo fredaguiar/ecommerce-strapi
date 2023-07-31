@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation, BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/home/Home';
-import ItemDetails from './components/ItemDetails';
-import Checkout from './components/Checkout';
-import Confirmation from './components/Confirmation';
-import Navbar from './components/Navbar';
-import CartMenu from './components/CartMenu';
+import ItemDetails from './components/item/ItemDetails';
+import Checkout from './components/checkout/Checkout';
+import Confirmation from './components/checkout/Confirmation';
+import Navbar from './components/global/Navbar';
+import CartMenu from './components/global/CartMenu';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();

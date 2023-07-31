@@ -3,10 +3,15 @@ import styled from '@emotion/styled';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useAppSelector, useAppDispatch } from '../state/store';
+import { useAppSelector, useAppDispatch } from '../../state/store';
 import { IconButton, Box, Divider, Typography, Button } from '@mui/material';
-import { shades } from '../theme';
-import { setIsCartOpen, decreaseCount, increaseCount, removeFromCart } from '../state/cartReducer';
+import { shades } from '../../theme';
+import {
+  setIsCartOpen,
+  decreaseCount,
+  increaseCount,
+  removeFromCart
+} from '../../state/cartReducer';
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -118,7 +123,7 @@ const CartMenu = () => {
                 color: 'white',
                 minWidth: '100%',
                 padding: '20px 40px',
-                margin: '20px 0',
+                margin: '20px 0'
               }}
               onClick={() => {
                 navigate('/checkout');

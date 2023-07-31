@@ -2,13 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useAppDispatch } from '../state/store';
+import { useAppDispatch } from '../../state/store';
 import { IconButton, Box, useTheme, Typography, Button } from '@mui/material';
-import { shades } from '../theme';
-import { addToCart } from '../state/cartReducer';
+import { shades } from '../../theme';
+import { addToCart } from '../../state/cartReducer';
 
 export interface IImage {
-  data?: { attributes?: { format?: { medium?: { url?: string } } } };
+  data?: {
+    attributes?: {
+      url?: string;
+      formats?: { medium?: { url?: string } };
+    };
+  };
 }
 
 export interface IItemAttributes {
@@ -24,10 +29,10 @@ export interface IItemAttributes {
 
 export interface IItem {
   item: IItemAttributes;
-  width: string;
+  // width: string;
 }
 
-const Item = ({ item, width }: IItem) => {
+const Item = ({ item }: IItem) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
@@ -35,10 +40,10 @@ const Item = ({ item, width }: IItem) => {
   const theme = useTheme();
 
   const { name, price, image, category } = item.attributes;
-  const imageUrl = image?.data?.attributes?.format?.medium?.url;
+  const imageUrl = image?.data?.attributes?.formats?.medium?.url;
 
   return (
-    <Box width={width}>
+    <Box>
       <Box
         position='relative'
         onMouseOver={() => setIsHovered(true)}
@@ -47,8 +52,8 @@ const Item = ({ item, width }: IItem) => {
         <img
           alt={item.name}
           width='300px'
-          height='400px'
-          src={`http://localhost:1337/${imageUrl}`}
+          height='500px'
+          src={`http://localhost:1337${imageUrl}`}
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: 'pointer' }}
         />
@@ -80,7 +85,7 @@ const Item = ({ item, width }: IItem) => {
               onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
               sx={{
                 backgroundColor: shades.primary[300],
-                color: 'white',
+                color: 'white'
               }}
             >
               Add to Cart
