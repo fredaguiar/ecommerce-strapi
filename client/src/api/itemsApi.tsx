@@ -6,9 +6,16 @@ const fetchItems = async () => {
     method: 'GET'
   });
   const json = await items.json();
-  console.log('🚀 ~ file: itemsApi.tsx:9 ~ getItems ~ json:', json);
-
   return json.data;
 };
 
-export { fetchItems };
+const fetchItem = async (id) => {
+  const item = await fetch(`${process.env.STRAPI_HOST}/api/items/${id}?populate=image`, {
+    method: 'GET'
+  });
+  const json = await item.json();
+  console.log('🚀 ~ file: itemsApi.tsx:15 ~ fetchItem ~ json.data:', json.data);
+  return json.data;
+};
+
+export { fetchItems, fetchItem };

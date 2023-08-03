@@ -1,86 +1,56 @@
-import { useAppDispatch } from '../state/store';
-import { useNavigate } from 'react-router-dom';
-import { IconButton, Box, Badge } from '@mui/material';
-import {
-  PersonOutline,
-  ShoppingBagOutlined,
-  MenuOutlined,
-  SearchOutlined
-} from '@mui/icons-material';
-import { shades } from '../theme';
-import { setIsCartOpen } from '../state/cartReducer';
+import { useTheme, Box, Typography } from '@mui/material';
+import { shades } from '../../theme';
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
+const Footer = () => {
+  const {
+    palette: { common }
+  } = useTheme();
   return (
-    <Box
-      display='flex'
-      alignItems='center'
-      bgcolor='rgba(255, 255, 255, 0.8)'
-      width='100%'
-      height='60px'
-      color='black'
-      position='fixed'
-      top='0'
-      left='0'
-      zIndex='1'
-      border='solid black 1px'
-    >
+    <Box bgcolor='#cccccc' p='40px 0' mt='70px'>
       <Box
-        display='flex'
-        alignItems='center'
-        justifyContent='space-between'
         width='80%'
-        border='solid black 1px'
         margin='auto'
+        display='flex'
+        justifyContent='space-between'
+        flexWrap='wrap'
+        rowGap='30px'
+        columnGap='clamp(20px,30px,40px)'
       >
-        <Box
-          color={shades.secondary[500]}
-          onClick={() => navigate('/')}
-          sx={{ '&:hover': { cursor: 'pointer' } }}
-        >
-          Ecommerce
+        <Box width='clamp(20%,25%,30%)'>
+          <Typography variant='h4' fontWeight='bold' mb='30px' color={shades.secondary[500]}>
+            ECOMMER
+          </Typography>
+          <div>Ecommerce shopping cart Strapi...</div>
         </Box>
-        <Box
-          display='flex'
-          justifyContent='space-between'
-          columnGap='20px'
-          color={shades.secondary[500]}
-          zIndex='2'
-        >
-          <IconButton sx={{ color: 'black' }}>
-            <SearchOutlined />
-          </IconButton>
-          <IconButton sx={{ color: 'black' }}>
-            <PersonOutline />
-          </IconButton>
-          <Badge
-            // badgeContent={cart.length}
-            color='secondary'
-            // invisible={cart.length === 0}
-            sx={{
-              '& .MuiBadge-badge': {
-                padding: '0 2px',
-                top: '5',
-                right: '5',
-                height: '14px',
-                minWidth: '14px'
-              }
-            }}
-          >
-            <IconButton onClick={() => dispatch(setIsCartOpen())} sx={{ color: 'black' }}>
-              <ShoppingBagOutlined />
-            </IconButton>
-          </Badge>
-          <IconButton sx={{ color: 'black' }}>
-            <MenuOutlined />
-          </IconButton>
+        <Box>
+          <Typography variant='h4' fontWeight='bold' mb='30px' color={shades.secondary}>
+            About us
+          </Typography>
+          <Typography mb='30px'>Our stores</Typography>
+          <Typography mb='30px'>Careers</Typography>
+          <Typography mb='30px'>Terms & conditions</Typography>
+          <Typography mb='30px'>Privacy policiy</Typography>
+        </Box>
+        <Box>
+          <Typography variant='h4' fontWeight='bold' mb='30px' color={shades.secondary}>
+            Customer care
+          </Typography>
+          <Typography mb='30px'>Help Center</Typography>
+          <Typography mb='30px'>Track your order</Typography>
+          <Typography mb='30px'>Corporate or Bulk Purchasing</Typography>
+          <Typography mb='30px'>Returns and Refunds</Typography>
+        </Box>
+        <Box width='clamp(20%,30%,40%)'>
+          <Typography variant='h4' fontWeight='bold' mb='30px' color={shades.secondary}>
+            Contact us
+          </Typography>
+          <Typography mb='30px'>Granville Street, Vancouver, Canada</Typography>
+          <Typography mb='30px'>Email: fred.aguiar.teixeira@hotmail.com</Typography>
+          <Typography mb='30px'>Phone 778.999.9999</Typography>
         </Box>
       </Box>
     </Box>
   );
 };
 
-export default Navbar;
+export default Footer;
