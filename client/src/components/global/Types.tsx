@@ -7,18 +7,14 @@ export interface IImage {
   };
 }
 
-export interface IItemAttributes {
+export interface IItem {
   attributes: {
     name: string;
     price: number;
     image: IImage;
     category: string;
+    longDescription: string;
   };
   name: string;
   id: string;
-}
-
-export interface IItem {
-  item: IItemAttributes;
-  // width: string;
 }

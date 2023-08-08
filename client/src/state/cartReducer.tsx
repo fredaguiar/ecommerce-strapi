@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IItem } from '../components/global/Types';
 
 // export interface IItemState {
 //   count: number;
@@ -8,13 +9,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface ICartState {
   isCartOpen: boolean;
   cart: Array<any>;
-  items: Array<any>;
-}
-
-export interface ICartState {
-  isCartOpen: boolean;
-  cart: Array<any>;
-  items: Array<any>;
+  items: Array<IItem>;
 }
 
 const initialState: ICartState = { isCartOpen: false, cart: [], items: [] };
@@ -46,8 +41,8 @@ const cartSlice = createSlice({
     },
     setIsCartOpen(state) {
       state.isCartOpen = !state.isCartOpen;
-    },
-  },
+    }
+  }
 });
 
 export const { setItems, addToCart, removeFromCart, increaseCount, decreaseCount, setIsCartOpen } =

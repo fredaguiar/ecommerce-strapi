@@ -8,24 +8,30 @@ import { IconButton, Box, useTheme, Typography, Button } from '@mui/material';
 import { shades } from '../../theme';
 import { addToCart } from '../../state/cartReducer';
 
-const Item = ({ item }: IItem) => {
+interface IItemProps {
+  item: IItem;
+  width?: string;
+  height?: string;
+}
+
+const Item: React.FC<IItemProps> = (props: IItemProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [count, setCount] = useState(1);
   const theme = useTheme();
 
-  const { name, price, image, category } = item.attributes;
+  const { name, price, image, category } = props.item.attributes;
   const imageUrl = image?.data?.attributes?.formats?.medium?.url;
 
   return (
     <Box>
       <Box position='relative'>
         <img
-          alt={item.name}
-          width='300px'
-          height='500px'
+          alt={props.item.name}
+          width={props.width || '300px'}
+          height={props.height || '500px'}
           src={`http://localhost:1337${imageUrl}`}
-          onClick={() => navigate(`/item/${item.id}`)}
+          onClick={() => navigate(`/item/${props.item.id}`)}
           style={{ cursor: 'pointer' }}
         />
       </Box>
@@ -60,7 +66,7 @@ const Item = ({ item }: IItem) => {
           </Box>
           <Box>
             <Button
-              onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
+              onClick={() => dispatch(addToCart({ item: { ...props.item, count } }))}
               sx={{
                 backgroundColor: shades.primary[300],
                 color: 'white'
