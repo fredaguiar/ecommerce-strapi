@@ -88,7 +88,7 @@ const checkoutSchema = [
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const cart = useAppSelector((state) => state.cart.cart);
+  const cart = useAppSelector((state) => state.cart.cartItems);
   const firstStep = activeStep === 0;
   const secondStep = activeStep === 1;
 

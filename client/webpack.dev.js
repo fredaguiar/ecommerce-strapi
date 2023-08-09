@@ -11,7 +11,7 @@ module.exports = merge(webpackConfig, {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'images/[hash][ext][query]'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {

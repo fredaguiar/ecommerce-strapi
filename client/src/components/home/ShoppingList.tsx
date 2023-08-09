@@ -34,6 +34,7 @@ const ShoppingList = (props: IShoppingList) => {
         </Typography>
       </Box>
       <Tabs
+        value={value}
         onChange={handleChange}
         textColor='primary'
         indicatorColor='primary'

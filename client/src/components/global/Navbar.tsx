@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../state/store';
+import { useAppDispatch, useAppSelector } from '../../state/store';
 import { useNavigate } from 'react-router-dom';
 import { IconButton, Box, Badge } from '@mui/material';
 import {
@@ -13,6 +13,8 @@ import { setIsCartOpen } from '../../state/cartReducer';
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const cart = useAppSelector((state) => state.cart);
 
   return (
     <Box
@@ -57,14 +59,14 @@ const Navbar = () => {
             <PersonOutline />
           </IconButton>
           <Badge
-            // badgeContent={cart.length}
+            badgeContent={cart.cartItems.length}
             color='secondary'
-            // invisible={cart.length === 0}
+            invisible={cart.cartItems.length === 0}
             sx={{
               '& .MuiBadge-badge': {
                 padding: '0 2px',
-                top: '5',
-                right: '5',
+                top: '5px',
+                right: '5px',
                 height: '14px',
                 minWidth: '14px'
               }

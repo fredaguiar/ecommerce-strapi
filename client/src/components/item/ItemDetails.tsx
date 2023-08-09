@@ -13,7 +13,7 @@ import { fetchItem, fetchItems } from '../../api/itemsApi';
 
 const ItemDetails = () => {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('description');
   const { itemId } = useParams();
   const [count, setCount] = useState(1);
   const [item, setItem] = useState<IItem>();
@@ -83,7 +83,11 @@ const ItemDetails = () => {
               onClick={() => dispatch(addToCart({ item: { ...item, count } }))}
               sx={{
                 backgroundColor: shades.primary[300],
-                color: 'white'
+                color: 'white',
+                ':hover': {
+                  bgcolor: '#cccccc',
+                  color: 'white'
+                }
               }}
             >
               Add to Cart
@@ -105,11 +109,11 @@ const ItemDetails = () => {
           </Box>
         </Box>
         <Box m='20px 0'>
-          <Tabs onChange={handleChange}>
+          <Tabs value={value} onChange={handleChange}>
             <Tab label='Description' value='description'></Tab>
             <Tab label='Reviews' value='reviews'></Tab>
           </Tabs>
-          <Box display='flex' flexWrap='wrap' gap='15px'>
+          <Box mt='20px' display='flex' flexWrap='wrap' gap='15px'>
             {(value === 'description' || !value) && attributes?.longDescription}
             {value === 'reviews' && 'reviews'}
           </Box>

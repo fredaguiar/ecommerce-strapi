@@ -14,7 +14,9 @@ export interface IItem {
     image: IImage;
     category: string;
     longDescription: string;
+    shortDescription: string;
   };
   name: string;
   id: string;
+  count: number;
 }

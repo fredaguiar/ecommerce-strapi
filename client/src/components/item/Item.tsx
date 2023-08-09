@@ -53,27 +53,47 @@ const Item: React.FC<IItemProps> = (props: IItemProps) => {
           <Typography>{name}</Typography>
           <Typography fontWeight='bold'>Price: ${price}</Typography>
         </Box>
-        <Box margin='auto' display='flex' justifyContent='space-between'>
-          {/* amount */}
-          <Box display='flex' alignItems='center' bgcolor={shades.neutral[400]} borderRadius='3px'>
-            <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
-              <RemoveIcon />
-            </IconButton>
-            <Typography color={shades.primary[300]}>{count}</Typography>
-            <IconButton onClick={() => setCount(Math.max(count + 1, 1))}>
-              <AddIcon />
-            </IconButton>
-          </Box>
-          <Box>
-            <Button
-              onClick={() => dispatch(addToCart({ item: { ...props.item, count } }))}
-              sx={{
-                backgroundColor: shades.primary[300],
-                color: 'white'
-              }}
+        <Box
+          marginTop='3px'
+          width='100%'
+          margin='auto'
+          display='flex'
+          justifyContent='space-between'
+          flexWrap='wrap'
+          rowGap='10px'
+          columnGap='clamp(20px,30px,40px)'
+        >
+          <Box display='flex' justifyContent='flex-start'>
+            {/* amount */}
+            <Box
+              display='flex'
+              alignItems='center'
+              bgcolor={shades.neutral[400]}
+              borderRadius='3px'
             >
-              Add to Cart
-            </Button>
+              <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography color={shades.primary[300]}>{count}</Typography>
+              <IconButton onClick={() => setCount(Math.max(count + 1, 1))}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+            <Box display='flex' alignItems='center' marginLeft='10px'>
+              <Button
+                onClick={() => dispatch(addToCart({ item: { ...props.item, count } }))}
+                sx={{
+                  backgroundColor: shades.primary[300],
+                  color: 'white',
+                  ':hover': {
+                    bgcolor: '#cccccc',
+                    color: 'white'
+                  }
+                }}
+              >
+                Add to Cart
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
