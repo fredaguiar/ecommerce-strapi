@@ -67,8 +67,8 @@ const CartMenu = () => {
                 <FlexBox padding='15px 0'>
                   <Box flex='1 1 40%'>
                     <img
-                      width='130px'
-                      height='170px'
+                      width='150px'
+                      height='250px'
                       alt={item?.name}
                       src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
                     />
@@ -87,7 +87,8 @@ const CartMenu = () => {
                       <Box
                         display='flex'
                         alignItems='center'
-                        border={`1px solid ${shades.primary[100]}`}
+                        bgcolor={shades.neutral[400]}
+                        borderRadius='3px'
                       >
                         <IconButton onClick={() => dispatch(decreaseCount({ id: item.id }))}>
                           <RemoveIcon />
@@ -96,10 +97,9 @@ const CartMenu = () => {
                         <IconButton onClick={() => dispatch(increaseCount({ id: item.id }))}>
                           <AddIcon />
                         </IconButton>
-                        <Typography>{item.count}</Typography>
                       </Box>
                       {/* price */}
-                      <Typography fontWeight='bold'>{item.attributes.price}</Typography>
+                      <Typography fontWeight='bold'>${item.attributes.price}</Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -112,7 +112,7 @@ const CartMenu = () => {
           <Box margin='20px 0'>
             <FlexBox margin='20px 0'>
               <Typography fontWeight='bold'>SUBTOTAL</Typography>
-              <Typography fontWeight='bold'>total</Typography>
+              <Typography fontWeight='bold'>${total}</Typography>
             </FlexBox>
           </Box>
           <Box margin='20px 0'>
@@ -123,7 +123,11 @@ const CartMenu = () => {
                 color: 'white',
                 minWidth: '100%',
                 padding: '20px 40px',
-                margin: '20px 0'
+                margin: '20px 0',
+                ':hover': {
+                  bgcolor: '#cccccc',
+                  color: 'white'
+                }
               }}
               onClick={() => {
                 navigate('/checkout');

@@ -20,3 +20,21 @@ export interface IItem {
   id: string;
   count: number;
 }
+export interface IAddress {
+  firstName: string;
+  lastName: string;
+  street1: string;
+  street2: string;
+  country: string;
+  city: string;
+  state: string;
+  postal: string;
+  isSameAddress?: boolean;
+}
+
+export interface IAddressesAll {
+  billingAddress: IAddress;
+  shippingAddress: IAddress;
+  email: string;
+  phone: string;
+}

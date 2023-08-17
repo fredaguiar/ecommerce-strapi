@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as yup from 'yup';
-import { Formik } from 'formik';
+// import { Formik } from 'formik';
+import { useFormik } from 'formik';
 import Shipping from './Shipping';
-import { Box, Button, Stepper, Step, StepLabel, useTheme } from '@mui/material';
+import Payment from './Payment';
+import { Box, Stepper, Step, StepLabel, Button } from '@mui/material';
 import { useAppSelector, useAppDispatch } from '../../state/store';
-import { setItems } from '../../state/cartReducer';
+import { IAddressesAll, IAddress } from '../global/Types';
+import { shades } from '../../theme';
 
-const initValues = {
+const initValues: IAddressesAll = {
   billingAddress: {
     firstName: '',
     lastName: '',
@@ -18,7 +21,6 @@ const initValues = {
     postal: ''
   },
   shippingAddress: {
-    isSameAddress: true,
     firstName: '',
     lastName: '',
     street1: '',
@@ -26,7 +28,8 @@ const initValues = {
     country: '',
     city: '',
     state: '',
-    postal: ''
+    postal: '',
+    isSameAddress: true
   },
   email: '',
   phone: ''
@@ -35,28 +38,28 @@ const initValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required('required'),
-      lastName: yup.string().required('required'),
-      street1: yup.string().required('required'),
+      firstName: yup.string().required('Required'),
+      lastName: yup.string().required('Required'),
+      street1: yup.string().required('Required'),
       street2: yup.string(),
-      country: yup.string().required('required'),
-      city: yup.string().required('required'),
-      state: yup.string().required('required'),
-      postal: yup.string().required('required')
+      country: yup.string().required('Required'),
+      city: yup.string().required('Required'),
+      state: yup.string().required('Required'),
+      postal: yup.string().required('Required')
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
       firstName: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       lastName: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       street1: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       street2: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
@@ -64,43 +67,67 @@ const checkoutSchema = [
       }),
       country: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       city: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       state: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       }),
       postal: yup.string().when('isSameAddress', {
         is: (isSameAddress) => isSameAddress === true,
-        then: () => yup.string().required('required')
+        then: () => yup.string().required('Required')
       })
     })
   }),
   yup.object().shape({
-    email: yup.string().required('required'),
-    phone: yup.string().required('required')
+    email: yup.string().email('Enter a valid email').required('Required'),
+    phone: yup.string().required('Required')
   })
 ];
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const cart = useAppSelector((state) => state.cart.cartItems);
   const firstStep = activeStep === 0;
+  console.log('🚀 ~ file: Checkout.tsx:96 ~ Checkout ~ activeStep:', activeStep);
   const secondStep = activeStep === 1;
 
-  const handleFormSubmit = async (value, actions) => {
+  const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
+
+    console.log('🚀 ~ file: Checkout.tsx ~ Checkout ~ setActiveStep:', activeStep);
+
+    // copy billing address to shipping address
+    if (firstStep && values.shippingAddress.isSameAddress) {
+      actions.setFieldValue('shippingAddress', {
+        ...values.billingAddress,
+        isSameAddress: true
+      });
+    }
+
+    if (secondStep) {
+      makePayment(values);
+    }
+
+    actions.setTouched({});
   };
 
-  const makePayment = async () => {};
+  const makePayment = async (values) => {};
+
+  const formik = useFormik({
+    initialValues: initValues,
+    validationSchema: checkoutSchema[activeStep],
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
 
   return (
-    <Box width='80%' margin='100% auto'>
-      <Stepper>
+    <Box width='80%' margin='100px auto'>
+      <Stepper activeStep={activeStep} sx={{ m: '20px 0' }}>
         <Step>
           <StepLabel>Billing</StepLabel>
         </Step>
@@ -109,27 +136,69 @@ const Checkout = () => {
         </Step>
       </Stepper>
       <Box>
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initValues}
-          validationSchema={checkoutSchema[activeStep]}
-        >
-          {({ values, errors, touched, handleBlur, handleChange, handleSubmit, setFieldValue }) => (
-            <form onSubmit={handleSubmit}>
-              {firstStep && (
-                <Shipping
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  handleSubmit={handleSubmit}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-            </form>
+        <form onSubmit={formik.handleSubmit}>
+          {firstStep && (
+            <Shipping
+              values={formik.values}
+              errors={formik.errors}
+              touched={formik.touched}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+              setFieldValue={formik.setFieldValue}
+            />
           )}
-        </Formik>
+          {secondStep && (
+            <Payment
+              values={formik.values}
+              errors={formik.errors}
+              touched={formik.touched}
+              handleBlur={formik.handleBlur}
+              handleChange={formik.handleChange}
+            />
+          )}
+          <Box display='flex' justifyContent='space-between' gap='50px'>
+            {secondStep && (
+              <Button
+                fullWidth
+                color='primary'
+                variant='contained'
+                onClick={() => setActiveStep(activeStep - 1)}
+                sx={{
+                  backgroundColor: shades.primary[200],
+                  boxShadow: 'none',
+                  borderRadius: 0,
+                  padding: '15px 40px',
+                  color: 'white',
+                  ':hover': {
+                    bgcolor: '#cccccc',
+                    color: 'white'
+                  }
+                }}
+              >
+                Back
+              </Button>
+            )}
+            <Button
+              fullWidth
+              type='submit'
+              color='primary'
+              variant='contained'
+              sx={{
+                backgroundColor: shades.primary[400],
+                boxShadow: 'none',
+                borderRadius: 0,
+                padding: '15px 40px',
+                color: 'white',
+                ':hover': {
+                  bgcolor: '#cccccc',
+                  color: 'white'
+                }
+              }}
+            >
+              {firstStep ? 'Next' : 'Place Order'}
+            </Button>
+          </Box>
+        </form>
       </Box>
     </Box>
   );
