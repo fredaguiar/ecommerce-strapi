@@ -10,6 +10,9 @@ const { createCoreController } = require("@strapi/strapi").factories;
 module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
     const { products, userName, email } = ctx.request.body;
+    let lineItems;
+    let session;
+
     try {
       // retrieve item info
       const productsAsync = products.map(async (prod) => {
@@ -28,14 +31,21 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
             },
             unit_amount: item.price * 100,
           },
-          quantity: products.count,
+          quantity: prod.count,
         };
       });
 
-      const lineItems = await Promise.all(productsAsync);
+      lineItems = await Promise.all(productsAsync);
+    } catch (err) {
+      ctx.response.status = 500;
+      return {
+        error: { message: "Retrieve items info failure!", stack: err.stack },
+      };
+    }
 
+    try {
       // Create a Stripe session
-      const session = await stripe.checkout.sessions.create({
+      session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         mode: "payment",
         success_url: `${process.env.CLIENT_HOST}/checkout/success`,
@@ -43,8 +53,18 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
         customer_email: email,
         line_items: lineItems,
       });
+    } catch (err) {
+      ctx.response.status = 500;
+      return {
+        error: {
+          message: "Create a Stripe session failure!",
+          stack: err.stack,
+        },
+      };
+    }
 
-      // create the item in Strapi
+    try {
+      // Log the item in Strapi
       await strapi.service("api::order.order").create({
         data: { userName, products, stripeSessionId: session.id },
       });
@@ -52,7 +72,9 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       return { id: session.id };
     } catch (err) {
       ctx.response.status = 500;
-      return { error: { message: "Payment failure!" } };
+      return {
+        error: { message: "Log the item in Strapi failure!", stack: err.stack },
+      };
     }
   },
 }));

@@ -15,10 +15,10 @@ export interface IAddressForm {
 const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }: IAddressForm) => {
   const isNonMobile = useMediaQuery('(min-width: 600px)');
 
-  const formattedName = (field) => `${type}.${field}`;
-  const formattedError = (field) =>
+  const formattedName = (field: string) => `${type}.${field}`;
+  const formattedError = (field: string) =>
     getIn(touched, formattedName(field)) && Boolean(getIn(errors, formattedName(field)));
-  const formattedHelper = (field) =>
+  const formattedHelper = (field: string) =>
     getIn(touched, formattedName(field)) && getIn(errors, formattedName(field));
 
   return (
