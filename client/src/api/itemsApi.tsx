@@ -9,12 +9,11 @@ const fetchItems = async () => {
   return json.data;
 };
 
-const fetchItem = async (id) => {
+const fetchItem = async (id: string) => {
   const item = await fetch(`${process.env.STRAPI_HOST}/api/items/${id}?populate=image`, {
     method: 'GET'
   });
   const json = await item.json();
-  console.log('🚀 ~ file: itemsApi.tsx:15 ~ fetchItem ~ json.data:', json.data);
   return json.data;
 };
 

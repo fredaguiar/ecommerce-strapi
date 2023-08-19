@@ -52,14 +52,14 @@ const Shipping = ({
           <Typography sx={{ mb: '15px' }} fontSize='18px'>
             Shipping Information
           </Typography>
-          {/* <AddressForm
+          <AddressForm
             type='shippingAddress'
             values={values.shippingAddress}
             errors={errors}
             touched={touched}
             handleBlur={handleBlur}
             handleChange={handleChange}
-          /> */}
+          />
         </Box>
       )}
     </Box>

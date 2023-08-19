@@ -4,7 +4,7 @@ import { ChangeEventHandler, FocusEventHandler } from 'react';
 import { IAddress, IAddressesAll } from '../global/Types';
 
 export interface IPayment {
-  values: any;
+  values: IAddressesAll;
   errors: FormikErrors<IAddressesAll>;
   touched: FormikTouched<IAddressesAll>;
   handleBlur: FocusEventHandler<HTMLInputElement>;
@@ -27,7 +27,7 @@ const Payment = ({ values, errors, touched, handleBlur, handleChange }: IPayment
           value={values.email}
           name='email'
           error={!!touched.email && !!errors.email}
-          // helperText={touched.email && errors.email}
+          helperText={touched.email && errors.email}
           sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
         ></TextField>
         <TextField
@@ -39,7 +39,7 @@ const Payment = ({ values, errors, touched, handleBlur, handleChange }: IPayment
           value={values.phone}
           name='phone'
           error={!!touched.phone && !!errors.phone}
-          // helperText={touched.email && errors.email}
+          helperText={touched.phone && errors.phone}
           sx={{ gridColumn: 'span 4' }}
         ></TextField>
       </Box>

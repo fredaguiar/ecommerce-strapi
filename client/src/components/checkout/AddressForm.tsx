@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler } from 'react';
 import { Box, useMediaQuery, TextField } from '@mui/material';
-import { getIn, FormikErrors, FormikTouched } from 'formik';
+import { FormikErrors, FormikTouched, getIn } from 'formik';
 import { IAddress, IAddressesAll } from '../global/Types';
 
 export interface IAddressForm {
@@ -15,35 +15,11 @@ export interface IAddressForm {
 const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }: IAddressForm) => {
   const isNonMobile = useMediaQuery('(min-width: 600px)');
 
-  const formattedName = (field) => {
-    return `${type}.${field}`;
-  };
-  // const formattedError = (field) => {
-  //   console.log(
-  //     '🚀 ~ file: AddressForm.tsx:23 ~ formattedError ~ touched firstName:',
-  //     touched[formattedName('firstName')]
-  //   );
-  //   console.log(
-  //     '🚀 ~ file: AddressForm.tsx:23 ~ formattedError ~ errors firstName:',
-  //     errors[formattedName('firstName')]
-  //   );
-  //   return touched.firstName && Boolean(errors.firstName);
-  // };
-  // const formattedHelper = (field) =>
-  //   getIn(touched, formattedName(field) && getIn(errors, formattedName(field)));
-
-  console.log('TOUCHED', touched);
-  console.log('VALUES', values);
-  console.log('ERRORS', errors);
-  console.log('touched.billingAddress?.firstName', touched.billingAddress?.firstName);
-  console.log(
-    'getIn(touched, billingAddress.firstName)',
-    getIn(touched, 'billingAddress.firstName')
-  );
-  // console.log('errors.firstName', errors.firstName);
-  console.log('getIn(errors, firstName)', getIn(errors, 'firstName'));
-  console.log('errors.billingAddress.firstName', errors.billingAddress?.firstName);
-  console.log('errors.billingAddress.firstName', getIn(errors, 'billingAddress.firstName'));
+  const formattedName = (field) => `${type}.${field}`;
+  const formattedError = (field) =>
+    getIn(touched, formattedName(field)) && Boolean(getIn(errors, formattedName(field)));
+  const formattedHelper = (field) =>
+    getIn(touched, formattedName(field)) && getIn(errors, formattedName(field));
 
   return (
     <Box
@@ -59,13 +35,12 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         onBlur={handleBlur}
         onChange={handleChange}
         value={values.firstName}
-        name='billingAddress.firstName'
-        // error={formattedError('firstName')}
-        error={touched.billingAddress?.firstName && Boolean(errors?.billingAddress?.firstName)}
-        helperText={touched.billingAddress?.firstName ? errors?.billingAddress?.firstName : ''}
+        name={formattedName('firstName')}
+        error={formattedError('firstName')}
+        helperText={formattedHelper('firstName')}
         sx={{ gridColumn: 'span 2' }}
       ></TextField>
-      {/* <TextField
+      <TextField
         fullWidth
         type='text'
         label='Last Name'
@@ -74,7 +49,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.lastName}
         name={formattedName('lastName')}
         error={formattedError('lastName')}
-        // helperText={formattedHelper('lastName')}
+        helperText={formattedHelper('lastName')}
         sx={{ gridColumn: 'span 2' }}
       ></TextField>
       <TextField
@@ -86,7 +61,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.country}
         name={formattedName('country')}
         error={formattedError('country')}
-        // helperText={formattedHelper('country')}
+        helperText={formattedHelper('country')}
         sx={{ gridColumn: 'span 4' }}
       ></TextField>
       <TextField
@@ -98,7 +73,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.street1}
         name={formattedName('street1')}
         error={formattedError('street1')}
-        // helperText={formattedHelper('street1')}
+        helperText={formattedHelper('street1')}
         sx={{ gridColumn: 'span 2' }}
       ></TextField>
       <TextField
@@ -110,7 +85,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.street2}
         name={formattedName('street2')}
         error={formattedError('street2')}
-        // helperText={formattedHelper('street2')}
+        helperText={formattedHelper('street2')}
         sx={{ gridColumn: 'span 2' }}
       ></TextField>
       <TextField
@@ -122,7 +97,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.city}
         name={formattedName('city')}
         error={formattedError('city')}
-        // helperText={formattedHelper('city')}
+        helperText={formattedHelper('city')}
         sx={{ gridColumn: 'span 2' }}
       ></TextField>
       <TextField
@@ -134,7 +109,7 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.state}
         name={formattedName('state')}
         error={formattedError('state')}
-        // helperText={formattedHelper('state')}
+        helperText={formattedHelper('state')}
         sx={{ gridColumn: 'span 1' }}
       ></TextField>
       <TextField
@@ -146,9 +121,9 @@ const AddressForm = ({ type, values, errors, touched, handleBlur, handleChange }
         value={values.postal}
         name={formattedName('postal')}
         error={formattedError('postal')}
-        // helperText={formattedHelper('postal')}
+        helperText={formattedHelper('postal')}
         sx={{ gridColumn: 'span 1' }}
-      ></TextField> */}
+      ></TextField>
     </Box>
   );
 };

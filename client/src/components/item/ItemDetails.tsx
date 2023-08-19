@@ -25,7 +25,7 @@ const ItemDetails = () => {
 
   useEffect(() => {
     const loadItem = async () => {
-      setItem(await fetchItem(itemId));
+      setItem(await fetchItem(itemId as string));
     };
     const loadRelatedItems = async () => {
       setItems(await fetchItems());

@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { Box, Stepper, Step, StepLabel, Button } from '@mui/material';
 import * as yup from 'yup';
-// import { Formik } from 'formik';
 import { useFormik } from 'formik';
 import Shipping from './Shipping';
 import Payment from './Payment';
-import { Box, Stepper, Step, StepLabel, Button } from '@mui/material';
-import { useAppSelector, useAppDispatch } from '../../state/store';
-import { IAddressesAll, IAddress } from '../global/Types';
+import { makePayment } from '../../api/stripe';
+import { useAppSelector } from '../../state/store';
+import { IAddressesAll } from '../global/Types';
 import { shades } from '../../theme';
 
 const initValues: IAddressesAll = {
@@ -50,35 +50,35 @@ const checkoutSchema = [
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
       firstName: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       lastName: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       street1: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       street2: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string()
       }),
       country: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       city: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       state: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       }),
       postal: yup.string().when('isSameAddress', {
-        is: (isSameAddress) => isSameAddress === true,
+        is: (isSameAddress) => !isSameAddress,
         then: () => yup.string().required('Required')
       })
     })
@@ -95,10 +95,8 @@ const Checkout = () => {
   console.log('🚀 ~ file: Checkout.tsx:96 ~ Checkout ~ activeStep:', activeStep);
   const secondStep = activeStep === 1;
 
-  const handleFormSubmit = async (values, actions) => {
+  const handleFormSubmit = (values, actions) => {
     setActiveStep(activeStep + 1);
-
-    console.log('🚀 ~ file: Checkout.tsx ~ Checkout ~ setActiveStep:', activeStep);
 
     // copy billing address to shipping address
     if (firstStep && values.shippingAddress.isSameAddress) {
@@ -109,20 +107,17 @@ const Checkout = () => {
     }
 
     if (secondStep) {
-      makePayment(values);
+      const items = useAppSelector((state) => state.cart.items);
+      makePayment(values, items);
     }
 
     actions.setTouched({});
   };
 
-  const makePayment = async (values) => {};
-
   const formik = useFormik({
     initialValues: initValues,
     validationSchema: checkoutSchema[activeStep],
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    }
+    onSubmit: handleFormSubmit
   });
 
   return (
