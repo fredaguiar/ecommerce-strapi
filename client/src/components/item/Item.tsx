@@ -35,6 +35,14 @@ const Item: React.FC<IItemProps> = (props: IItemProps) => {
           style={{ cursor: 'pointer' }}
         />
       </Box>
+      <Button
+        onClick={() => navigate(`/checkout/success`)}
+        sx={{
+          backgroundColor: 'red'
+        }}
+      >
+        TEST NAV
+      </Button>
       <Box
         marginTop='3px'
         width='100%'

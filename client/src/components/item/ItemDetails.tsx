@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import FavoriteBorderOutlined from '@mui/icons-material/FavoriteBorderOutlined';
@@ -19,7 +19,7 @@ const ItemDetails = () => {
   const [item, setItem] = useState<IItem>();
   const [items, setItems] = useState<IItem[]>([]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: SyntheticEvent<Element, Event>, newValue: string) => {
     setValue(newValue);
   };
 

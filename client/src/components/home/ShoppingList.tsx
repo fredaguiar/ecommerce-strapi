@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, SyntheticEvent } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/store';
 import { Box, useMediaQuery, Typography, Tab, Tabs } from '@mui/material';
 import { setItems } from '../../state/cartReducer';
@@ -22,7 +22,7 @@ const ShoppingList = (props: IShoppingList) => {
     loadItems();
   }, []);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: SyntheticEvent<Element, Event>, newValue: string) => {
     setValue(newValue);
   };
 

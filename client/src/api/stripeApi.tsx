@@ -11,7 +11,7 @@ const makePayment = async (values: IAddressesAll, cartItems: IItem[]) => {
   }
 
   const requestBody = {
-    userName: [values.billingAddress.firstName, values.billingAddress.lastName].join(' '),
+    userName: [values.billingAddress.firstName, values.billingAddress.lastName].join('.'),
     email: values.email,
     products: cartItems.map((cartItem) => ({ id: cartItem.id, count: cartItem.count }))
   };
