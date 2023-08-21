@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Stepper, Step, StepLabel, Button } from '@mui/material';
+import { Box, Stepper, Step, StepLabel, Button, CircularProgress } from '@mui/material';
 import * as yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import Shipping from './Shipping';
@@ -93,6 +93,7 @@ const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
   const firstStep = activeStep === 0;
   const secondStep = activeStep === 1;
+  const thirdStep = activeStep === 2;
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const handleFormSubmit = (values: IAddressesAll, actions: FormikHelpers<IAddressesAll>) => {
@@ -118,6 +119,14 @@ const Checkout = () => {
     validationSchema: checkoutSchema[activeStep],
     onSubmit: handleFormSubmit
   });
+
+  if (thirdStep) {
+    return (
+      <Box display='flex' justifyContent='center' width='80%' margin='100px auto'>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box width='80%' margin='100px auto'>
@@ -189,8 +198,12 @@ const Checkout = () => {
                 }
               }}
             >
-              {firstStep ? 'Next' : 'Place Order'}
+              {firstStep && 'Next'}
+              {secondStep && 'Place Order'}
             </Button>
+          </Box>
+          <Box display='flex' justifyContent='flex-end'>
+            {secondStep && 'Use Test Card# 4242424242424242'}
           </Box>
         </form>
       </Box>

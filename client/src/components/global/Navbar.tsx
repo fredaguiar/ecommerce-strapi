@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../state/store';
 import { useNavigate } from 'react-router-dom';
-import { IconButton, Box, Badge } from '@mui/material';
+import { IconButton, Box, Badge, Typography } from '@mui/material';
 import {
   PersonOutline,
   ShoppingBagOutlined,
@@ -35,15 +35,10 @@ const Navbar = () => {
         alignItems='center'
         justifyContent='space-between'
         width='80%'
-        border='solid black 1px'
         margin='auto'
       >
-        <Box
-          color={shades.secondary[500]}
-          onClick={() => navigate('/')}
-          sx={{ '&:hover': { cursor: 'pointer' } }}
-        >
-          Ecommerce
+        <Box onClick={() => navigate('/')} sx={{ '&:hover': { cursor: 'pointer' } }}>
+          <Typography variant='h3'>eCommerce</Typography>
         </Box>
         <Box
           display='flex'
