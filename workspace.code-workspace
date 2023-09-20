@@ -1,0 +1,14 @@
+{
+  "folders": [
+	{
+		"path": "../nginx-sql"
+	},
+	{
+		"path": "../react-docker"
+	},
+	{
+		"path": "."
+	}
+],
+  "settings": {}
+}
