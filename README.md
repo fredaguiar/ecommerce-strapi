@@ -1,32 +1,67 @@
 # 🚀 Getting started with ECommerce-Strapi
 
-### `Install`
+<br/><br/>
+
+## Install
 
 ```
 git clone https://github.com/fredaguiar/ecommerce-strapi.git
 /ecommerce-strapi/server$ npm i
 /ecommerce-strapi/client$ npm i
-
 ```
 
-### `develop mode`
+<br/>
+
+## Developer mode
+
+Developer mode uses an embedded serverless database: `SQLite`.
 
 ```
 /ecommerce-strapi/server$ npm run develop
 /ecommerce-strapi/client$ npm run dev
 ```
 
-### `403 Forbidden Error`
+#### `Create Strapi Admin and add items`
 
-Check if the **Roles and Permission** are set accordingly.
+- Load http://localhost:1337/admin
+- Create a new user admin
+- You are now logged in to the Strapi Dashboard
+- In the left menu, Click on Media Library
+- Click on Add New Assets, select all images from `/ecommerce-strapi/test-data` and upload them
+- In the left menu, Click on Content Manager
+- Under Collection Types, select Item, and Create New Entry
+- Save and Publish it.
+- You can create as many items as you want.
 
-#### Set Roles & Permissions
+#### `Roles & Permissions`
+
+Check if the **Roles and Permission** are set accordingly to prevent `403 Forbidden Error`.
 
 - Click on General Settings icon Settings at the bottom of the main navigation.
 - Under Users & Permissions Plugin, choose Roles.
-- Click the Public role.
+- Click the `Public` role.
 - Scroll down under Permissions.
-- In the Permissions tab, find `Restaurant` and click on it.
-- Click the checkboxes next to find and findOne.
-- Repeat with `Order`: click the checkboxes next to find.
+- In the Permissions tab
+  - expand `Item` and select `find` and `findOne`.
+  - expand `ORder` and select `create` .
 - Finally, click Save.
+
+#### `Place an Order`
+
+Only item purchase is currently working.
+
+- Load the app: http://localhost:8080/
+- Add one or more items to the cart.
+- click on shopping bag at the top left.
+- you can remove items, or click on Checkout.
+- Enter a Billing Info and Contact Info.
+- Click on Place Order.
+- Use this fake Credit Card #: 4242424242424242.
+- Enter a date in the future.
+- For the remaining fields, enter any info.
+
+<br/><br/>
+
+## Production mode
+
+Production mode uses a dockerized `MySQL` database.
