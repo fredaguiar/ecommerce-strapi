@@ -21,13 +21,13 @@ Developer mode uses an embedded serverless database: `SQLite`.
 /ecommerce-strapi/client$ npm run dev
 ```
 
-#### Production mode
+#### Production mode (Docker)
 
 Production mode uses a dockerized `MySQL` database.
 
 ```
 /ecommerce-strapi/server$ docker-compose up
-/ecommerce-strapi/client$ npm run dev
+/ecommerce-strapi/client$ docker-compose up
 ```
 
 #### `Create Strapi Admin and add items`
