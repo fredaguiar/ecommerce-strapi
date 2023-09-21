@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --open --hot --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "stop": "npx kill-port 8080"
+    "stop": "npx kill-port 3000"
   },
   "keywords": [],
   "author": "",
