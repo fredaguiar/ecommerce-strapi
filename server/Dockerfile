@@ -14,7 +14,7 @@ RUN npm run build
 
 # Creating final production image
 FROM node:18-alpine
-RUN apk add --no-cache vips-dev curl
+RUN apk add --no-cache vips-dev
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 WORKDIR /opt/

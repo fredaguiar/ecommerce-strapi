@@ -1,6 +1,6 @@
 # 🚀 Getting started with ECommerce-Strapi
 
-<br/><br/>
+<br/>
 
 ## Install
 
@@ -12,12 +12,21 @@ git clone https://github.com/fredaguiar/ecommerce-strapi.git
 
 <br/>
 
-## Developer mode
+#### Developer mode
 
 Developer mode uses an embedded serverless database: `SQLite`.
 
 ```
 /ecommerce-strapi/server$ npm run develop
+/ecommerce-strapi/client$ npm run dev
+```
+
+#### Production mode
+
+Production mode uses a dockerized `MySQL` database.
+
+```
+/ecommerce-strapi/server$ docker-compose up
 /ecommerce-strapi/client$ npm run dev
 ```
 
@@ -39,12 +48,12 @@ Check if the **Roles and Permission** are set accordingly to prevent `403 Forbid
 
 - Click on General Settings icon Settings at the bottom of the main navigation.
 - Under Users & Permissions Plugin, choose Roles.
-- Click the `Public` role.
+- Select the `Public` role.
 - Scroll down under Permissions.
 - In the Permissions tab
   - expand `Item` and select `find` and `findOne`.
   - expand `ORder` and select `create` .
-- Finally, click Save.
+- Click Save.
 
 #### `Place an Order`
 
@@ -60,8 +69,4 @@ Only item purchase is currently working.
 - Enter a date in the future.
 - For the remaining fields, enter any info.
 
-<br/><br/>
-
-## Production mode
-
-Production mode uses a dockerized `MySQL` database.
+<br/>
