@@ -22,3 +22,11 @@ const NODE_PORT = process.env.NODE_PORT;
 server.listen(NODE_PORT, () => {
   console.log(`App listening on port ${NODE_PORT}!`);
 });
+
+function closeGracefully(signal) {
+  console.log(`Received signal to terminate: ${signal}`);
+  process.kill(process.pid, signal);
+}
+
+process.once("SIGINT", closeGracefully);
+process.once("SIGTERM", closeGracefully);

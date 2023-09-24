@@ -1,9 +1,5 @@
 version: "3.8"
 
-networks:
-  app-network:
-    driver: bridge
-
 services:
   nginx:
     build:
@@ -16,8 +12,6 @@ services:
     image: nginx-client
     container_name: nginx-client
     restart: unless-stopped
-    networks:
-      - app-network
 
   ui:
     build:
@@ -28,7 +22,5 @@ services:
     image: nodejs-client
     container_name: nodejs-client
     restart: unless-stopped
-    networks:
-      - app-network
     environment: # FOR server.js
       NODE_PORT: 3000
