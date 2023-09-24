@@ -59,7 +59,7 @@ Check if the **Roles and Permission** are set accordingly to prevent `403 Forbid
 
 Only item purchase is currently working.
 
-- Load the app: http://localhost:8080/
+- Load the app: http://localhost:3000/
 - Add one or more items to the cart.
 - click on shopping bag at the top left.
 - you can remove items, or click on Checkout.
