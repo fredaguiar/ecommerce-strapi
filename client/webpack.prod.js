@@ -33,6 +33,7 @@ module.exports = merge(webpackConfig, {
         concurrency: 100,
       },
     }),
+    // TODO: Remove this line and .env.prod file
     new Dotenv({ path: "./.env.prod" }),
   ],
 });
