@@ -10,6 +10,8 @@ FROM node:18-alpine3.16
 USER node
 WORKDIR /usr/app
 RUN npm i express
+# TODO: RUN npm install pm2 -g
 COPY --chown=node:node --from=build /usr/app/dist /usr/app
 EXPOSE 3000
+# TODO pm2
 CMD [ "node", "server.js" ]

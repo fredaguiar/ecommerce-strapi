@@ -59,14 +59,30 @@ Check if the **Roles and Permission** are set accordingly to prevent `403 Forbid
 
 Only item purchase is currently working.
 
-- Load the app: http://localhost:3000/
+- Load the app: http://localhost
 - Add one or more items to the cart.
 - click on shopping bag at the top left.
 - you can remove items, or click on Checkout.
 - Enter a Billing Info and Contact Info.
 - Click on Place Order.
-- Use this fake Credit Card #: 4242424242424242.
+- Use this fake Credit Card #: 4242424242424242
 - Enter a date in the future.
 - For the remaining fields, enter any info.
 
 <br/>
+
+## `Docker command for developers`
+
+Build and run
+
+```
+docker-compose build --no-cache & docker-compose up -d
+```
+
+Remove all containers and Images
+
+```
+docker-compose stop
+docker-compose rm -f
+docker rmi -f $(docker images -q 'nodejs-client') $(docker images -q 'nginx-client')
+```
