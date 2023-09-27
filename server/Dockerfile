@@ -23,7 +23,8 @@ WORKDIR /opt/app
 COPY --from=build /opt/app ./
 ENV PATH /opt/node_modules/.bin:$PATH
 
-RUN chown -R node:node /opt/app
-USER node
+# TODO: it fails in the image upload: Permission denied /opt/app/public/uploads
+# RUN chown -R node:node /opt/app
+# USER node
 EXPOSE 1337
 CMD ["npm", "run", "start"]

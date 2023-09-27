@@ -16,6 +16,16 @@ server.get("/", (req, res) => {
   });
 });
 
+server.get("/checkout/success", (req, res) => {
+  console.log(">>>>>>>>>>>>>>>>>>>>>> req.url", req.url);
+
+  res.sendFile(`${DIST}/index.html`, (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
 server.use(express.static(DIST));
 
 const NODE_PORT = process.env.NODE_PORT;
