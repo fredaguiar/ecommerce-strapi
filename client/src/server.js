@@ -2,12 +2,13 @@ const express = require("express");
 const DIST = __dirname; //path.resolve(__dirname, 'dist');
 const server = express();
 
-server.get("/version", (req, res) => {
-  res.json({ version: "1.0" });
-});
+// server.get("/version", (req, res) => {
+//   res.json({ version: "1.0" });
+// });
 
-server.get("/", (req, res) => {
-  console.log(">>>>>>>>>>>>>>>>>>>>>> req.url", req.url);
+server.get("/confirmation", (req, res) => {
+  console.log(">>>>>>>>>>>>>>>>>>>>>>confirmation req.url", req.url);
+  console.log(">>>>>>>>>>>>>>>>>>>>>>confirmation DIST", DIST);
 
   res.sendFile(`${DIST}/index.html`, (err) => {
     if (err) {
@@ -16,8 +17,9 @@ server.get("/", (req, res) => {
   });
 });
 
-server.get("/checkout/success", (req, res) => {
+server.get("/", (req, res) => {
   console.log(">>>>>>>>>>>>>>>>>>>>>> req.url", req.url);
+  console.log(">>>>>>>>>>>>>>>>>>>>>> DIST", DIST);
 
   res.sendFile(`${DIST}/index.html`, (err) => {
     if (err) {

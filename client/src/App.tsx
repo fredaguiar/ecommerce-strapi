@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
-import { useLocation, BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './components/home/Home';
-import ItemDetails from './components/item/ItemDetails';
-import Checkout from './components/checkout/Checkout';
-import Confirmation from './components/checkout/Confirmation';
-import Navbar from './components/global/Navbar';
-import NotFound from './components/global/NotFound';
-import CartMenu from './components/global/CartMenu';
-import Footer from './components/global/Footer';
+import { useEffect } from "react";
+import { useLocation, BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/home/Home";
+import ItemDetails from "./components/item/ItemDetails";
+import Checkout from "./components/checkout/Checkout";
+import Confirmation from "./components/checkout/Confirmation";
+import Navbar from "./components/global/Navbar";
+import NotFound from "./components/global/NotFound";
+import CartMenu from "./components/global/CartMenu";
+import Footer from "./components/global/Footer";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -19,16 +19,16 @@ const ScrollToTop = () => {
 
 const App = () => {
   return (
-    <div className='app'>
+    <div className="app">
       <BrowserRouter>
         <Navbar />
         <ScrollToTop />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='item/:itemId' element={<ItemDetails />} />
-          <Route path='checkout' element={<Checkout />} />
-          <Route path='checkout/success' element={<Confirmation />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="/" element={<Home />} />
+          <Route path="item/:itemId" element={<ItemDetails />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="confirmation" element={<Confirmation />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <CartMenu />
         <Footer />
