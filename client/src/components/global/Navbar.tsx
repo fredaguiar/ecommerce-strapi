@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from '../../state/store';
-import { useNavigate } from 'react-router-dom';
-import { IconButton, Box, Badge, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from "../../state/store";
+import { useNavigate } from "react-router-dom";
+import { IconButton, Box, Badge, Typography } from "@mui/material";
 import {
   PersonOutline,
   ShoppingBagOutlined,
   MenuOutlined,
-  SearchOutlined
-} from '@mui/icons-material';
-import { shades } from '../../theme';
-import { setIsCartOpen } from '../../state/cartReducer';
+  SearchOutlined,
+} from "@mui/icons-material";
+import { shades } from "../../theme";
+import { setIsCartOpen } from "../../state/cartReducer";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -18,61 +18,67 @@ const Navbar = () => {
 
   return (
     <Box
-      display='flex'
-      alignItems='center'
-      bgcolor='rgba(255, 255, 255, 0.8)'
-      width='100%'
-      height='60px'
-      color='black'
-      position='fixed'
-      top='0'
-      left='0'
-      zIndex='1'
-      border='solid black 1px'
+      display="flex"
+      alignItems="center"
+      bgcolor="rgba(255, 255, 255, 0.8)"
+      width="100%"
+      height="60px"
+      color="black"
+      position="fixed"
+      top="0"
+      left="0"
+      zIndex="1"
+      border="solid black 1px"
     >
       <Box
-        display='flex'
-        alignItems='center'
-        justifyContent='space-between'
-        width='80%'
-        margin='auto'
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        width="80%"
+        margin="auto"
       >
-        <Box onClick={() => navigate('/')} sx={{ '&:hover': { cursor: 'pointer' } }}>
-          <Typography variant='h3'>eCommerce</Typography>
+        <Box
+          onClick={() => navigate("/")}
+          sx={{ "&:hover": { cursor: "pointer" } }}
+        >
+          <Typography variant="h3">eCommerce</Typography>
         </Box>
         <Box
-          display='flex'
-          justifyContent='space-between'
-          columnGap='20px'
+          display="flex"
+          justifyContent="space-between"
+          columnGap="20px"
           color={shades.secondary[500]}
-          zIndex='2'
+          zIndex="2"
         >
-          <IconButton sx={{ color: 'black' }}>
+          {/* <IconButton sx={{ color: 'black' }}>
             <SearchOutlined />
           </IconButton>
           <IconButton sx={{ color: 'black' }}>
-            <PersonOutline />
-          </IconButton>
+            <PersonOutline disabled/>
+          </IconButton> */}
           <Badge
             badgeContent={cart.cartItems.length}
-            color='secondary'
+            color="secondary"
             invisible={cart.cartItems.length === 0}
             sx={{
-              '& .MuiBadge-badge': {
-                padding: '0 2px',
-                top: '5px',
-                right: '5px',
-                height: '14px',
-                minWidth: '14px'
-              }
+              "& .MuiBadge-badge": {
+                padding: "0 2px",
+                top: "5px",
+                right: "5px",
+                height: "14px",
+                minWidth: "14px",
+              },
             }}
           >
-            <IconButton onClick={() => dispatch(setIsCartOpen())} sx={{ color: 'black' }}>
+            <IconButton
+              onClick={() => dispatch(setIsCartOpen())}
+              sx={{ color: "black" }}
+            >
               <ShoppingBagOutlined />
             </IconButton>
           </Badge>
-          <IconButton sx={{ color: 'black' }}>
-            <MenuOutlined />
+          <IconButton sx={{ color: "black" }}>
+            {/* <MenuOutlined /> */}
           </IconButton>
         </Box>
       </Box>
