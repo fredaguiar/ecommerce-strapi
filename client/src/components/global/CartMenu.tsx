@@ -1,17 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import styled from '@emotion/styled';
-import CloseIcon from '@mui/icons-material/Close';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { useAppSelector, useAppDispatch } from '../../state/store';
-import { IconButton, Box, Divider, Typography, Button } from '@mui/material';
-import { shades } from '../../theme';
+import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
+import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { useAppSelector, useAppDispatch } from "../../state/store";
+import { IconButton, Box, Divider, Typography, Button } from "@mui/material";
+import { shades } from "../../theme";
 import {
   setIsCartOpen,
   decreaseCount,
   increaseCount,
-  removeFromCart
-} from '../../state/cartReducer';
+  removeFromCart,
+} from "../../state/cartReducer";
 
 const FlexBox = styled(Box)`
   display: flex;
@@ -31,30 +31,32 @@ const CartMenu = () => {
   return (
     // Overlay
     <Box
-      display={cart.isCartOpen ? 'block' : 'none'}
-      bgcolor='rgba(0, 0, 0, 0.4)'
-      alignItems='center'
-      height='100%'
-      width='100%'
-      position='fixed'
-      top='0'
-      left='0'
-      zIndex='10'
-      overflow='auto'
+      display={cart.isCartOpen ? "block" : "none"}
+      bgcolor="rgba(0, 0, 0, 0.4)"
+      alignItems="center"
+      height="100%"
+      width="100%"
+      position="fixed"
+      top="0"
+      left="0"
+      zIndex="10"
+      overflow="auto"
     >
       {/* Modal */}
       <Box
-        position='fixed'
-        right='0'
-        bottom='0'
-        width='max(400px, 30%)'
-        height='100%'
-        bgcolor='white'
+        position="fixed"
+        right="0"
+        bottom="0"
+        width="max(400px, 30%)"
+        height="100%"
+        bgcolor="white"
       >
-        <Box padding='30px' overflow='auto' height='100%'>
+        <Box padding="30px" overflow="auto" height="100%">
           {/* header */}
-          <FlexBox mb='15px'>
-            <Typography variant='h3'>SHOPPING BAG ({cart.cartItems.length})</Typography>
+          <FlexBox mb="15px">
+            <Typography variant="h3">
+              SHOPPING BAG ({cart.cartItems.length})
+            </Typography>
             <IconButton onClick={() => dispatch(setIsCartOpen())}>
               <CloseIcon />
             </IconButton>
@@ -64,42 +66,58 @@ const CartMenu = () => {
           <Box>
             {cart.cartItems.map((item) => (
               <Box key={`${item.attributes.name}-${item.id}`}>
-                <FlexBox padding='15px 0'>
-                  <Box flex='1 1 40%'>
+                <FlexBox padding="15px 0">
+                  <Box flex="1 1 40%">
                     <img
-                      width='150px'
-                      height='250px'
+                      width="150px"
+                      height="250px"
                       alt={item?.name}
-                      src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      src={`${process.env.STRAPI_HOST}${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
                     />
                   </Box>
-                  <Box flex='1 1 60%'>
+                  <Box flex="1 1 60%">
                     {/* Item name/description */}
-                    <FlexBox mb='5px'>
-                      <Typography fontWeight='bold'>{item.attributes.name}</Typography>
-                      <IconButton onClick={() => dispatch(removeFromCart({ id: item.id }))}>
+                    <FlexBox mb="5px">
+                      <Typography fontWeight="bold">
+                        {item.attributes.name}
+                      </Typography>
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromCart({ id: item.id }))
+                        }
+                      >
                         <CloseIcon />
                       </IconButton>
                     </FlexBox>
                     <Typography>{item.attributes.shortDescription}</Typography>
                     {/* // amount */}
-                    <FlexBox margin='15px 0'>
+                    <FlexBox margin="15px 0">
                       <Box
-                        display='flex'
-                        alignItems='center'
+                        display="flex"
+                        alignItems="center"
                         bgcolor={shades.neutral[400]}
-                        borderRadius='3px'
+                        borderRadius="3px"
                       >
-                        <IconButton onClick={() => dispatch(decreaseCount({ id: item.id }))}>
+                        <IconButton
+                          onClick={() =>
+                            dispatch(decreaseCount({ id: item.id }))
+                          }
+                        >
                           <RemoveIcon />
                         </IconButton>
                         <Typography>{item.count}</Typography>
-                        <IconButton onClick={() => dispatch(increaseCount({ id: item.id }))}>
+                        <IconButton
+                          onClick={() =>
+                            dispatch(increaseCount({ id: item.id }))
+                          }
+                        >
                           <AddIcon />
                         </IconButton>
                       </Box>
                       {/* price */}
-                      <Typography fontWeight='bold'>${item.attributes.price}</Typography>
+                      <Typography fontWeight="bold">
+                        ${item.attributes.price}
+                      </Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -109,28 +127,28 @@ const CartMenu = () => {
           </Box>
 
           {/* actions */}
-          <Box margin='20px 0'>
-            <FlexBox margin='20px 0'>
-              <Typography fontWeight='bold'>SUBTOTAL</Typography>
-              <Typography fontWeight='bold'>${total}</Typography>
+          <Box margin="20px 0">
+            <FlexBox margin="20px 0">
+              <Typography fontWeight="bold">SUBTOTAL</Typography>
+              <Typography fontWeight="bold">${total}</Typography>
             </FlexBox>
           </Box>
-          <Box margin='20px 0'>
+          <Box margin="20px 0">
             <Button
               sx={{
                 backgroundColor: shades.primary[400],
                 borderRadius: 0,
-                color: 'white',
-                minWidth: '100%',
-                padding: '20px 40px',
-                margin: '20px 0',
-                ':hover': {
-                  bgcolor: '#cccccc',
-                  color: 'white'
-                }
+                color: "white",
+                minWidth: "100%",
+                padding: "20px 40px",
+                margin: "20px 0",
+                ":hover": {
+                  bgcolor: "#cccccc",
+                  color: "white",
+                },
               }}
               onClick={() => {
-                navigate('/checkout');
+                navigate("/checkout");
                 dispatch(setIsCartOpen());
               }}
             >
