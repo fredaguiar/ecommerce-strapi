@@ -16,7 +16,7 @@ import { useAppSelector } from "../../state/store";
 import { IAddressesAll } from "../global/Types";
 import { shades } from "../../theme";
 import { red } from "@mui/material/colors";
-// import ccinfo from "";
+import useImages, { IMAGES_FOR } from "../../hooks/useImages";
 
 const initValues: IAddressesAll = {
   billingAddress: {
@@ -104,6 +104,7 @@ const Checkout = () => {
   const secondStep = activeStep === 1;
   const thirdStep = activeStep === 2;
   const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const ccInfo = useImages(IMAGES_FOR.CC_INFO);
 
   const handleFormSubmit = (
     values: IAddressesAll,
@@ -230,7 +231,9 @@ const Checkout = () => {
               <Box display="flex" justifyContent="flex-end" mt="5px">
                 All the other credit card info, enter &nbsp;<strong> 1</strong>
               </Box>
-              {/* <Box display="flex" justifyContent="flex-end" mt="5px"></Box> */}
+              <Box display="flex" justifyContent="flex-end" mt="5px">
+                <img src={ccInfo} width="300px" height="185px" />
+              </Box>
             </div>
           )}
         </form>

@@ -18,14 +18,18 @@ const fetchItems = async () => {
 };
 
 const fetchItem = async (id: string) => {
-  const item = await fetch(
-    `${process.env.STRAPI_HOST}/api/items/${id}?populate=image`,
-    {
-      method: "GET",
-    }
-  );
-  const json = await item.json();
-  return json.data;
+  try {
+    const item = await fetch(
+      `${process.env.STRAPI_HOST}/api/items/${id}?populate=image`,
+      {
+        method: "GET",
+      }
+    );
+    const json = await item.json();
+    return json.data;
+  } catch (err) {
+    return {};
+  }
 };
 
 export { fetchItems, fetchItem };
