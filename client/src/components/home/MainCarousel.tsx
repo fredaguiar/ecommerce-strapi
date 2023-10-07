@@ -49,9 +49,7 @@ const MainCarousel = () => {
     >
       {carouselImages.map((imgSrc: string, index: number) => (
         <CarouselItem
-          key={`carouselItem-image-${index}-${Math.floor(
-            Math.random() * 10000
-          )}`}
+          key={`carouselItem-image-${imgSrc}}`}
           isNonMobile={isNonMobile}
           imageSrc={imgSrc}
           index={index}
