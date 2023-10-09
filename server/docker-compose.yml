@@ -21,7 +21,7 @@ services:
       DATABASE_PASSWORD: strapi
       JWT_SECRET: GPZAxIVBaXeF6OkkDULvvA==
       STRIPE_SECRET_KEY: sk_test_51NgDYsCLZ8gkHkFvd4MNz2a4JDlMXobkRMLDinVIMl7cWfMrKl3AXRX9pwaF3vxOaoCyShDbUsRCImUN73KDr3JF00eqwMKcqt
-      CLIENT_HOST: http://66.42.75.238:3000
+      CLIENT_HOST: http://66.42.75.238:8080
       NODE_ENV: production
     volumes:
       - ./config:/opt/app/config
