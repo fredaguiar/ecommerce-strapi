@@ -33,6 +33,7 @@ Production mode uses a dockerized `MySQL` database.
 #### `Create Strapi Admin and add items`
 
 - Load http://localhost:1337/admin
+- fred.aguiar.teixeira@hotmail.com / Strapi2\*\*\*\*
 - Create a new user admin
 - You are now logged in to the Strapi Dashboard
 - In the left menu, Click on Media Library
