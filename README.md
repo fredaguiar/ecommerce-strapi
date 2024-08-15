@@ -38,8 +38,8 @@ Production mode uses a dockerized `MySQL` database.
 /ecommerce-strapi/client$ docker compose up -d
 ```
 
-Make sure that this IP address matches the IP assigned in Vultr:
-STRAPI_HOST=http://149.28.11.104:1337
+Make sure that this IP address matches the assigned IP in the Vultr container matches the domain name fredaguiarteixeira.xyz (www.namecheap.com)
+STRAPI_HOST=http://fredaguiarteixeira.xyz:1337
 
 #### `Create Strapi Admin and add items`
 
