@@ -2,6 +2,14 @@
 
 <br/>
 
+## Install Node 18 lts
+
+```
+nvm install 18 --lts
+nvm list (copy the 18 lts)
+nvm use 18.x.x
+```
+
 ## Install
 
 ```
@@ -26,9 +34,12 @@ Developer mode uses an embedded serverless database: `SQLite`.
 Production mode uses a dockerized `MySQL` database.
 
 ```
-/ecommerce-strapi/server$ docker-compose up
-/ecommerce-strapi/client$ docker-compose up
+/ecommerce-strapi/server$ docker compose up -d
+/ecommerce-strapi/client$ docker compose up -d
 ```
+
+Make sure that this IP address matches the IP assigned in Vultr:
+STRAPI_HOST=http://149.28.11.104:1337
 
 #### `Create Strapi Admin and add items`
 
@@ -45,7 +56,7 @@ Production mode uses a dockerized `MySQL` database.
 
 #### `Roles & Permissions`
 
-Check if the **Roles and Permission** are set accordingly to prevent `403 Forbidden Error`.
+Check if the **Roles and Permission** are set accordingly to grant Find Items and Order Items, and prevent `403 Forbidden Error`.
 
 - Click on General Settings icon Settings at the bottom of the main navigation.
 - Under Users & Permissions Plugin, choose Roles.
@@ -60,7 +71,7 @@ Check if the **Roles and Permission** are set accordingly to prevent `403 Forbid
 
 Only item purchase is currently working.
 
-- Load the app: http://localhost/8080
+- Load the app: http://localhost/3000
 - Add one or more items to the cart.
 - click on shopping bag at the top left.
 - you can remove items, or click on Checkout.
@@ -69,6 +80,7 @@ Only item purchase is currently working.
 - Use this fake Credit Card #: 4242424242424242
 - Enter a date in the future.
 - For the remaining fields, enter any info.
+- Problem! After placing an order in dev mode, it redirects to port 8080. http://localhost:8080/confirmation, which leads to a blank page. This error still needs to be addressed.
 
 <br/>
 
