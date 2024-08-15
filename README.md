@@ -43,7 +43,9 @@ STRAPI_HOST=http://fredaguiarteixeira.xyz:1337
 
 #### `Create Strapi Admin and add items`
 
-- Load http://localhost:1337/admin
+- Load
+  - dev: http://localhost:1337/admin
+  - prod: http://fredaguiarteixeira.xyz:1337/admin
 - fred.aguiar.teixeira@hotmail.com / Strapi2\*\*\*\*
 - Create a new user admin
 - You are now logged in to the Strapi Dashboard
@@ -71,7 +73,9 @@ Check if the **Roles and Permission** are set accordingly to grant Find Items an
 
 Only item purchase is currently working.
 
-- Load the app: http://localhost/3000
+- Load the app:
+  - dev: http://localhost/3000
+  - prod: http://fredaguiarteixeira.xyz:3000
 - Add one or more items to the cart.
 - click on shopping bag at the top left.
 - you can remove items, or click on Checkout.
