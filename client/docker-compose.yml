@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   nginx:
@@ -9,8 +9,8 @@ services:
       - 8080:8080
     depends_on:
       - client
-    image: nginx-client
-    container_name: nginx-client
+    image: strapi-nginx-client
+    container_name: strapi-nginx-client
     restart: always
 
   client:
@@ -18,9 +18,9 @@ services:
       dockerfile: Dockerfile
       context: .
     ports:
-      - "3000:3000"
-    image: nodejs-client
-    container_name: nodejs-client
+      - '3000:3000'
+    image: strapi-client
+    container_name: strapi-client
     restart: unless-stopped
     environment: # FOR server.js
       NODE_PORT: 3000
